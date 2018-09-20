@@ -5,6 +5,8 @@ set(LIB_TESTS ${LIB}_tests)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+include_directories(3rdparty/json/include)
+
 file(GLOB LIB_SOURCES
         *.cpp
         *.hpp

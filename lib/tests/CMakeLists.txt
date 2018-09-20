@@ -6,7 +6,8 @@ include_directories(${gtest_SOURCE_DIR}/include)
 include_directories(../)
 
 file(GLOB TEST_SOURCES
-        *.cpp)
+        *.cpp
+        *.hpp)
 add_executable(${LIB_TESTS} ${TEST_SOURCES})
 add_dependencies(${LIB_TESTS} ${LIB} gtest_main)
 target_link_libraries(${LIB_TESTS} ${LIB} gtest_main)
