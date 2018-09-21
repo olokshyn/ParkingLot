@@ -6,6 +6,7 @@
 #define PARKINGLOT_CARSDENSITY_HPP
 
 #include <map>
+#include <vector>
 
 #include "DateTime.hpp"
 
@@ -20,6 +21,8 @@ using date_time_pair_t = std::pair<date_time::date_time_t,
                                    date_time::date_time_t>;
 
 cars_density_t build_cars_density();
+
+std::vector<int> build_cars_cumulative(const cars_density_t& cars_density);
 
 date_time_pair_t find_first_busiest_time(const cars_density_t& cars_density);
 

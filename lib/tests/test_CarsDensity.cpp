@@ -40,11 +40,94 @@ TEST(CarsDensity, Build)
     EXPECT_EQ(cars_density.end(), iter);
 }
 
-TEST(CarsDensity, find_first_busiest_time_0)
+TEST(CarsDensity, build_cars_cumulative_0)
+{
+    auto cars_density = fill_cars_density(
+            {
+
+            });
+    EXPECT_THROW(build_cars_cumulative(cars_density), std::runtime_error);
+}
+
+TEST(CarsDensity, build_cars_cumulative_1)
 {
     using date_time::from_time;
-    using date_time::operator==;
 
+    auto cars_density = fill_cars_density(
+            {
+                    {from_time(10, 15), from_time(12, 15)}
+            });
+    EXPECT_EQ(std::vector<int>({1, 0}), build_cars_cumulative(cars_density));
+}
+
+TEST(CarsDensity, build_cars_cumulative_1_the_same)
+{
+    using date_time::from_time;
+
+    auto cars_density = fill_cars_density(
+            {
+                    {from_time(10, 15), from_time(12, 15)},
+                    {from_time(10, 15), from_time(12, 15)},
+                    {from_time(10, 15), from_time(12, 15)},
+                    {from_time(13, 15), from_time(13, 15)},
+                    {from_time(13, 15), from_time(13, 15)},
+                    {from_time(13, 15), from_time(13, 15)}
+            });
+    EXPECT_EQ(std::vector<int>({3, 0, 0}), build_cars_cumulative(cars_density));
+}
+
+
+TEST(CarsDensity, build_cars_cumulative_2_interleaved)
+{
+    using date_time::from_time;
+
+    auto cars_density = fill_cars_density(
+            {
+                    {from_time(10, 15), from_time(12, 15)},
+                    {from_time(11, 20), from_time(13, 35)}
+            });
+    EXPECT_EQ(std::vector<int>({1, 2, 1, 0}), build_cars_cumulative(cars_density));
+}
+
+TEST(CarsDensity, build_cars_cumulative_2_intersected)
+{
+    using date_time::from_time;
+
+    auto cars_density = fill_cars_density(
+            {
+                    {from_time(10, 15), from_time(12, 15)},
+                    {from_time(12, 15), from_time(13, 35)}
+            });
+    EXPECT_EQ(std::vector<int>({1, 1, 0}), build_cars_cumulative(cars_density));
+}
+
+TEST(CarsDensity, build_cars_cumulative_2_intersected_2)
+{
+    using date_time::from_time;
+
+    auto cars_density = fill_cars_density(
+            {
+                    {from_time(10, 15), from_time(12, 15)},
+                    {from_time(12, 15), from_time(12, 15)}
+            });
+    EXPECT_EQ(std::vector<int>({1, 0}), build_cars_cumulative(cars_density));
+}
+
+TEST(CarsDensity, build_cars_cumulative_3_interleaved)
+{
+    using date_time::from_time;
+
+    auto cars_density = fill_cars_density(
+            {
+                    {from_time(10, 15), from_time(12, 15)},
+                    {from_time(12, 15), from_time(13, 35)},
+                    {from_time(12, 0), from_time(13, 0)}
+            });
+    EXPECT_EQ(std::vector<int>({1, 2, 2, 1, 0}), build_cars_cumulative(cars_density));
+}
+
+TEST(CarsDensity, find_first_busiest_time_0)
+{
     auto cars_density = fill_cars_density(
             {
 
