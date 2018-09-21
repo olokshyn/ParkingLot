@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.10)
-
 find_package(Qt5 COMPONENTS Core Widgets Charts REQUIRED)
 
 set(CMAKE_AUTOMOC ON)

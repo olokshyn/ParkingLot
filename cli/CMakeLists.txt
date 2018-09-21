@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.10)
-
 include_directories(../lib)
 
 file(GLOB CLI_SOURCES

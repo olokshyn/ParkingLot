@@ -5,6 +5,7 @@
 #include "DateTime.hpp"
 
 #include <iomanip>
+#include <iostream>
 
 using namespace lib;
 using namespace lib::date_time;
